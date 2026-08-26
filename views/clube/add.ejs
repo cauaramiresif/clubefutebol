@@ -1,0 +1,23 @@
+<%-include('../cabecalho.ejs')%>
+    <h1>Adicionar Aluno</h1>
+    <div>
+        <a href="/aluno/lst">Listar</a>
+    </div>
+    <div>
+        <form method="post">
+            <label>Nome:</label>
+            <input type="text" name="nome"><br>
+            <label>Ano de fundação:</label>
+            <input type="text" name="anoFundacao"><br>
+            <label>Campeonatos:</label>
+            <input type="text" name="campeonatos"><br>
+            <label>Número de títulos:</label>
+            <input type="number" name="nroTitulos"><br>
+            <label>Escudo:</label>
+            <input type="file" name="escudo"><br>
+            <button type="submit">Cadastrar</button>
+
+        </form>
+    </div>
+
+<%-include('../rodape.ejs')%>
