@@ -1,5 +1,5 @@
 <%-include('../cabecalho.ejs')%>
-    <h1>Alunos</h1>
+    <h1>campeonatos</h1>
     <div>
         <form action="
         " method="post">
@@ -8,20 +8,20 @@
          <button type="submit">Pesquisar</button>
     </form>
     </div>
-    <a href="/aluno/add">+ Aluno</a>
+    <a href="/campeonato/add">+ campeonato</a>
     <table>
         <tr>
             <td>Nome</td>
-            <td>Matrícula</td>
+            <td>País</td>
             <td>Ações</td>
         </tr>
       
-        <%for (const {id, nome, matricula} of Alunos) {%>
+        <%for (const {id, nome, pais} of campeonatos) {%>
         <tr>
             <td><%=nome%></td>
-            <td><%=matricula%></td>
-            <td><a href="/aluno/edt/<%=id%>">Editar</a>
-            <a href="/aluno/del/<%=id%>">Excluir</a></td>
+            <td><%=pais%></td>
+            <td><a href="/campeonato/edt/<%=id%>">Editar</a>
+            <a href="/campeonato/del/<%=id%>">Excluir</a></td>
         </tr>
         <%}%>
     </table>

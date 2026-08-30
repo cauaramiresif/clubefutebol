@@ -5,7 +5,7 @@ const Clube = conexao.Schema({
     anoFundacao: {type:String, required:true},
     campeonatos: {type:String, required:true},
     nroTitulos: {type:Number, required:true},
-    escudo: {type:File, required:true}
+    escudo: {type:Buffer, required:true}
 })
 
 export default conexao.model('Clube',Clube)

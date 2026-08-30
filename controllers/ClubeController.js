@@ -11,14 +11,18 @@ export default class ClubeController{
         }
         this.add = async(req, res)=>{
             //cria o Aluno
-           
+
+           app.post('/clube/add/ok',upload.single('foto'), async (req, res) => {
+
             await Clube.create({
                 nome: req.body.nome,
                 anoFundacao:req.body.anoFundacao,
                 campeonatos:req.body.campeonatos,
                 nroTitulos:req.body.nroTitulos,
-                escudo:req.body.escudo
+                escudo:req.file.escudo
             });
+            res.render("clube/addok" )
+})
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{

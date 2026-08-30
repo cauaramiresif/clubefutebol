@@ -12,13 +12,17 @@ export default class TecnicoController{
         this.add = async(req, res)=>{
             //cria o Aluno
            
+            app.post('/tecnico/add/ok',upload.single('foto'), async (req, res) => {
+
             await Tecnico.create({
                 nome: req.body.nome,
                 localNascimento:req.body.localNascimento,
                 clube:req.body.clube,
-                foto:req.body.foto
+                foto:req.file.foto
             });
             res.redirect('/'+caminhoBase + 'add');
+            res.render("tecnico/addok" )
+})
         }
         this.list = async(req, res)=>{
             const resultado = await Tecnico.find({})

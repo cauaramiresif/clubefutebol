@@ -6,7 +6,7 @@ const Jogador = conexao.Schema({
     localNascismento: {type:String, required:true},
     clube: {type:String, required:true},
     posicao: {type:String, required:true},
-    foto: {type:File, required:true}
+    foto: {type:Buffer, required:true}
 })
 
 export default conexao.model('Jogador',Jogador)

@@ -11,7 +11,9 @@ export default class JogadorController{
         }
         this.add = async(req, res)=>{
             //cria o Aluno
-           
+            
+            app.post('/jogador/add/ok',upload.single('foto'), async (req, res) => {
+
             await Jogador.create({
                 nome: req.body.nome,
                 camisa:req.body.camisa,
@@ -20,6 +22,8 @@ export default class JogadorController{
                 posicao:req.body.posicao,
                 foto:req.body.foto
             });
+            res.render("jogador/addok" )
+})
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{

@@ -12,22 +12,22 @@ export default class CampeonatoController{
         this.add = async(req, res)=>{
             //cria o Aluno
            
-            await Campeonato.create({
+            await campeonato.create({
                 nome: req.body.nome,
                 pais:req.body.pais
             });
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Campeonato.find({})
-            res.render(caminhoBase + 'lst', {Campeonatos:resultado})
+            const resultado = await campeonato.find({})
+            res.render(caminhoBase + 'lst', {campeonatos:resultado})
         }
         this.find = async(req, res)=>{
             const filtro = req.body.filtro;
             const resultado = await 
-            Campeonato.find({ nome: { $regex: filtro,
+            campeonato.find({ nome: { $regex: filtro,
                 $options: "i" }})
-            res.render(caminhoBase + 'lst', {Campeonatos:resultado})
+            res.render(caminhoBase + 'lst', {campeonatos:resultado})
         }
 
      
@@ -36,21 +36,21 @@ export default class CampeonatoController{
             //passar quem eu quero editar
             const id = req.params.id
             console.log(id)
-            const campeonato = await Campeonato.findById(id) 
+            const Campeonato = await campeonato.findById(id) 
             console.log(campeonato)
             res.render(caminhoBase + "edt", 
-                {Campeonato:campeonato})
+                {campeonato:Campeonato})
         }
 
 
         this.edt = async(req, res)=>{
-        await Campeonato.findByIdAndUpdate(req.params.id, req.body)
+        await campeonato.findByIdAndUpdate(req.params.id, req.body)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
 
          this.del = async(req, res)=>{
-        await Campeonato.findByIdAndDelete(req.params.id)
+        await campeonato.findByIdAndDelete(req.params.id)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
