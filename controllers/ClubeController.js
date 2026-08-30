@@ -12,17 +12,15 @@ export default class ClubeController{
         this.add = async(req, res)=>{
             //cria o Aluno
 
-           app.post('/clube/add/ok',upload.single('foto'), async (req, res) => {
-
             await Clube.create({
                 nome: req.body.nome,
                 anoFundacao:req.body.anoFundacao,
                 campeonatos:req.body.campeonatos,
                 nroTitulos:req.body.nroTitulos,
-                escudo:req.file.escudo
+                escudo:req.file.buffer
             });
-            res.render("clube/addok" )
-})
+            res.render("clube/addok")
+
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
@@ -44,19 +42,22 @@ export default class ClubeController{
             const id = req.params.id
             console.log(id)
             const clube = await Clube.findById(id) 
-            console.log(clube)
+            console.log(Clube)
             res.render(caminhoBase + "edt", 
                 {Clube:clube})
         }
 
 
         this.edt = async(req, res)=>{
-        await Clube.findByIdAndUpdate(req.params.id, req.body)
-        res.redirect('/'+caminhoBase + 'lst');
-        
-        }
+            if(req.file){
+                req.body.escudo = req.file.buffer
+                }
 
-         this.del = async(req, res)=>{
+        await Clube.findByIdAndUpdate(req.params.id, req.body)
+            res.redirect('/'+caminhoBase + 'lst');
+            }
+
+        this.del = async(req, res)=>{
         await Clube.findByIdAndDelete(req.params.id)
         res.redirect('/'+caminhoBase + 'lst');
         

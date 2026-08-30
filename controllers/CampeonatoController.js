@@ -1,5 +1,5 @@
 //importar o Model
-import campeonato from '../models/campeonato.js'
+import Campeonato from '../models/campeonato.js'
 
 export default class CampeonatoController{
 
@@ -12,22 +12,22 @@ export default class CampeonatoController{
         this.add = async(req, res)=>{
             //cria o Aluno
            
-            await campeonato.create({
+            await Campeonato.create({
                 nome: req.body.nome,
                 pais:req.body.pais
             });
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await campeonato.find({})
-            res.render(caminhoBase + 'lst', {campeonatos:resultado})
+            const resultado = await Campeonato.find({})
+            res.render(caminhoBase + 'lst', {Campeonatos:resultado})
         }
         this.find = async(req, res)=>{
             const filtro = req.body.filtro;
             const resultado = await 
-            campeonato.find({ nome: { $regex: filtro,
+            Campeonato.find({ nome: { $regex: filtro,
                 $options: "i" }})
-            res.render(caminhoBase + 'lst', {campeonatos:resultado})
+            res.render(caminhoBase + 'lst', {Campeonatos:resultado})
         }
 
      
@@ -36,21 +36,21 @@ export default class CampeonatoController{
             //passar quem eu quero editar
             const id = req.params.id
             console.log(id)
-            const Campeonato = await campeonato.findById(id) 
-            console.log(campeonato)
+            const campeonato = await Campeonato.findById(id) 
+            console.log(Campeonato)
             res.render(caminhoBase + "edt", 
-                {campeonato:Campeonato})
+                {Campeonato:campeonato})
         }
 
 
         this.edt = async(req, res)=>{
-        await campeonato.findByIdAndUpdate(req.params.id, req.body)
+        await Campeonato.findByIdAndUpdate(req.params.id, req.body)
         res.redirect('/'+caminhoBase + 'lst');
         
         }
 
          this.del = async(req, res)=>{
-        await campeonato.findByIdAndDelete(req.params.id)
+        await Campeonato.findByIdAndDelete(req.params.id)
         res.redirect('/'+caminhoBase + 'lst');
         
         }

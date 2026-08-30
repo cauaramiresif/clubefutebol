@@ -18,10 +18,10 @@ export default class TecnicoController{
                 nome: req.body.nome,
                 localNascimento:req.body.localNascimento,
                 clube:req.body.clube,
-                foto:req.file.foto
+                foto:req.file.buffer
             });
             res.redirect('/'+caminhoBase + 'add');
-            res.render("tecnico/addok" )
+            res.render("tecnico/addok")
 })
         }
         this.list = async(req, res)=>{
@@ -43,7 +43,7 @@ export default class TecnicoController{
             const id = req.params.id
             console.log(id)
             const tecnico = await Tecnico.findById(id) 
-            console.log(tecnico)
+            console.log(Tecnico)
             res.render(caminhoBase + "edt", 
                 {Tecnico:tecnico})
         }

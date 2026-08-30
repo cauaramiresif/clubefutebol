@@ -20,9 +20,9 @@ export default class JogadorController{
                 localNascimento:req.body.localNascimento,
                 clube:req.body.clube,
                 posicao:req.body.posicao,
-                foto:req.body.foto
+                foto:req.body.buffer
             });
-            res.render("jogador/addok" )
+            res.render("jogador/addok")
 })
             res.redirect('/'+caminhoBase + 'add');
         }
@@ -45,7 +45,7 @@ export default class JogadorController{
             const id = req.params.id
             console.log(id)
             const jogador = await Jogador.findById(id) 
-            console.log(jogador)
+            console.log(Jogador)
             res.render(caminhoBase + "edt", 
                 {Jogador:jogador})
         }
