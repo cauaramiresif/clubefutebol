@@ -4,16 +4,32 @@
 <a href="/aluno/lst">Listar</a>
 </div>
 <div>
-    <form  method="post">
+    <form  method="post" enctype="multipart/form-data">
        
         <input type="hidden" name="id" 
-        value="<%=Aluno.id%>"><br>
+        value="<%=Jogador.id%>"><br>
         <label>Nome:</label>
         <input type="text" name="nome" 
-        value="<%=Aluno.nome%>"><br>
-         <label>Matrícula:</label>
-        <input type="text" name="matricula"
-        value="<%=Aluno.matricula%>"
+        value="<%=Jogador.nome%>"><br>
+        <label>Camisa:</label>
+        <input type="number" name="camisa"
+        value="<%=Jogador.camisa%>"
+        ><br>
+        <label>Local de Nascimento:</label>
+        <input type="text" name="localNascimento"
+        value="<%=Jogador.localNascimento%>"
+        ><br>
+        <label>Clube:</label>
+        <input type="text" name="clube"
+        value="<%=Jogador.clube%>"
+        ><br>
+        <label>Posição Preferida:</label>
+        <input type="text" name="posicao"
+        value="<%=Jogador.posicao%>"
+        ><br>
+        <label>Foto:</label>
+        <input type="file" name="foto"
+        value="<%=Jogador.foto%>"
         ><br>
         <button type="submit">Cadastrar</button>
         

@@ -1,19 +1,27 @@
 <%-include('../cabecalho.ejs')%>
-<h1>Editar Aluno</h1>
+<h1>Editar tecnico</h1>
 <div>
-<a href="/aluno/lst">Listar</a>
+<a href="/tecnico/lst">Listar</a>
 </div>
 <div>
-    <form  method="post">
+    <form  method="post" enctype="multipart/form-data">
        
         <input type="hidden" name="id" 
-        value="<%=Aluno.id%>"><br>
+        value="<%=Tecnico.id%>"><br>
         <label>Nome:</label>
         <input type="text" name="nome" 
-        value="<%=Aluno.nome%>"><br>
-         <label>Matrícula:</label>
-        <input type="text" name="matricula"
-        value="<%=Aluno.matricula%>"
+        value="<%=Tecnico.nome%>"><br>
+        <label>Local de Nascimento:</label>
+        <input type="text" name="localNascimento"
+        value="<%=Tecnico.localNascimento%>"
+        ><br>
+        <label>Clube:</label>
+        <input type="text" name="clube"
+        value="<%=Tecnico.clube%>"
+        ><br>
+        <label>Foto:</label>
+        <input type="file" name="foto"
+        value="<%=Tecnico.foto%>"
         ><br>
         <button type="submit">Cadastrar</button>
         

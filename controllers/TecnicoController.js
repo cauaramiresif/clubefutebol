@@ -1,5 +1,5 @@
 //importar o Model
-import tecnico from '../models/tecnico.js'
+import Tecnico from '../models/tecnico.js'
 
 export default class TecnicoController{
 
@@ -11,8 +11,6 @@ export default class TecnicoController{
         }
         this.add = async(req, res)=>{
             //cria o Aluno
-           
-            app.post('/tecnico/add/ok',upload.single('foto'), async (req, res) => {
 
             await Tecnico.create({
                 nome: req.body.nome,
@@ -20,9 +18,9 @@ export default class TecnicoController{
                 clube:req.body.clube,
                 foto:req.file.buffer
             });
+            
             res.redirect('/'+caminhoBase + 'add');
-            res.render("tecnico/addok")
-})
+
         }
         this.list = async(req, res)=>{
             const resultado = await Tecnico.find({})
@@ -50,10 +48,13 @@ export default class TecnicoController{
 
 
         this.edt = async(req, res)=>{
-        await Tecnico.findByIdAndUpdate(req.params.id, req.body)
-        res.redirect('/'+caminhoBase + 'lst');
-        
-        }
+                    if(req.file){
+                        req.body.foto = req.file.buffer
+                        }
+                
+                await Tecnico.findByIdAndUpdate(req.params.id, req.body)
+                    res.redirect('/'+caminhoBase + 'lst');
+                    }
 
          this.del = async(req, res)=>{
         await Tecnico.findByIdAndDelete(req.params.id)

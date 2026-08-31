@@ -19,7 +19,6 @@ export default class ClubeController{
                 nroTitulos:req.body.nroTitulos,
                 escudo:req.file.buffer
             });
-            res.render("clube/addok")
 
             res.redirect('/'+caminhoBase + 'add');
         }

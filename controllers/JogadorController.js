@@ -1,5 +1,5 @@
 //importar o Model
-import jogador from '../models/jogador.js'
+import Jogador from '../models/jogador.js'
 
 export default class JogadorController{
 
@@ -11,8 +11,6 @@ export default class JogadorController{
         }
         this.add = async(req, res)=>{
             //cria o Aluno
-            
-            app.post('/jogador/add/ok',upload.single('foto'), async (req, res) => {
 
             await Jogador.create({
                 nome: req.body.nome,
@@ -20,10 +18,9 @@ export default class JogadorController{
                 localNascimento:req.body.localNascimento,
                 clube:req.body.clube,
                 posicao:req.body.posicao,
-                foto:req.body.buffer
+                foto:req.file.buffer
             });
-            res.render("jogador/addok")
-})
+
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
@@ -52,10 +49,13 @@ export default class JogadorController{
 
 
         this.edt = async(req, res)=>{
-        await Jogador.findByIdAndUpdate(req.params.id, req.body)
-        res.redirect('/'+caminhoBase + 'lst');
+                    if(req.file){
+                        req.body.foto = req.file.buffer
+                        }
         
-        }
+                await Jogador.findByIdAndUpdate(req.params.id, req.body)
+                    res.redirect('/'+caminhoBase + 'lst');
+                    }
 
          this.del = async(req, res)=>{
         await Jogador.findByIdAndDelete(req.params.id)

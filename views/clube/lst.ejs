@@ -19,11 +19,11 @@
             <td>Ações</td>
         </tr>
       
-        <%for (const {id, nome, anoFundacao, campeonato, nroTitulos, escudo} of Clubes) {%>
+        <%for (const {id, nome, anoFundacao, campeonatos, nroTitulos, escudo} of Clubes) {%>
         <tr>
             <td><%=nome%></td>
             <td><%=anoFundacao%></td>
-            <td><%=campeonato%></td>
+            <td><%=campeonatos%></td>
             <td><%=nroTitulos%></td>
             <td><img src="<%=escudo%>" width="150" height="150"></td>
             <td><a href="/clube/edt/<%=id%>">Editar</a>
