@@ -5,7 +5,7 @@
 </div>
 <div>
     <form  method="post" enctype="multipart/form-data">
-       
+
         <input type="hidden" name="id" 
         value="<%=Clube.id%>"><br>
         <label>Nome:</label>
@@ -23,12 +23,11 @@
         <input type="number" name="nroTitulos"
         value="<%=Clube.nroTitulos%>"
         ><br>
-        <label>Escudo:</label>
+        <label>Escudo: <img src="<%=Clube.escudo%>" width="150" height="150"></label>
         <input type="file" name="escudo"
         value="<%=Clube.escudo%>"
         ><br>
         <button type="submit">Cadastrar</button>
-        
     </form>
 </div>
 
