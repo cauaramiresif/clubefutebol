@@ -4,7 +4,7 @@ const Jogador = conexao.Schema({
     nome: {type:String, required:true},
     camisa: {type:Number, required:true},
     localNascimento: {type:String, required:true},
-    clube: {type:String, required:true},
+    clube: {type:conexao.Types.ObjectId, ref: "Clube", required:false},
     posicao: {type:String, required:true},
     foto: {type:Buffer, 
         get: (valor) => {

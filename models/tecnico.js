@@ -3,7 +3,7 @@ import conexao from '../config/conexao.js'
 const Tecnico = conexao.Schema({
     nome: {type:String, required:true},
     localNascimento: {type:String, required:true},
-    clube: {type:String, required:true},
+    clube: {type:conexao.Types.ObjectId, ref: "Clube", required:false},
     foto: {type:Buffer, 
         get: (valor) => {
            if (!valor) return null;
