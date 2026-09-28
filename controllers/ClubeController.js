@@ -16,7 +16,7 @@ export default class ClubeController{
             //cria o Aluno
 
              let ccampeonato = null;
-                if(req.body.clube != null) {
+                if(req.body.campeonato != null) {
                 ccampeonato = await Campeonato.findById(req.body.campeonato)
             }            
 
