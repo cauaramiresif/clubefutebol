@@ -15,10 +15,21 @@
         <input type="text" name="anoFundacao"
         value="<%=Clube.anoFundacao%>"
         ><br>
-        <label>Campeonatos:</label>
-        <input type="text" name="campeonatos"
-        value="<%=Clube.campeonatos%>"
-        ><br>
+        <div class="mb-3">
+        <label for="campeonato" class="form-label">Campeonatos</label>
+            <select name="campeonato" id="campeonato" class="form-control">
+                <option value="">selecione</option>
+                <% Campeonatos.forEach(function(campeonato){ %>
+                    <option value="<%=campeonato.id%>"
+                        <%= (Clube.campeonato && campeonato.id.toString() === Clube.campeonato.toString())
+                            ? 'selected'
+                            : '' %>
+                    >
+                        <%=campeonato.nome%>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
         <label>Número de Títulos:</label>
         <input type="number" name="nroTitulos"
         value="<%=Clube.nroTitulos%>"

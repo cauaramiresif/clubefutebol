@@ -1,5 +1,6 @@
 //importar o Model
 import Jogador from '../models/jogador.js'
+import Clube from '../models/clube.js'
 
 export default class JogadorController{
 
@@ -7,16 +8,23 @@ export default class JogadorController{
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
-            res.render(caminhoBase + "add")
+            const resultado = await Clube.find({});
+            res.render(caminhoBase + "add", {
+                Clubes: resultado})
         }
         this.add = async(req, res)=>{
             //cria o Aluno
+
+             let jclube = null;
+                if(req.body.clube != null) {
+                jclube = await Clube.findById(req.body.clube)
+            }
 
             await Jogador.create({
                 nome: req.body.nome,
                 camisa:req.body.camisa,
                 localNascimento:req.body.localNascimento,
-                clube:req.body.clube,
+                clube:jclube,
                 posicao:req.body.posicao,
                 foto:req.file.buffer
             });
@@ -24,7 +32,7 @@ export default class JogadorController{
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Jogador.find({})
+            const resultado = await Jogador.find({}) .populate('clube');
             res.render(caminhoBase + 'lst', {Jogadores:resultado})
         }
         this.find = async(req, res)=>{
@@ -35,20 +43,32 @@ export default class JogadorController{
             res.render(caminhoBase + 'lst', {Jogadores:resultado})
         }
 
-     
-
          this.openEdt = async(req, res)=>{
-            //passar quem eu quero editar
-            const id = req.params.id
-            console.log(id)
-            const jogador = await Jogador.findById(id) 
-            console.log(Jogador)
-            res.render(caminhoBase + "edt", 
-                {Jogador:jogador})
-        }
+    const resultado = await Jogador.findById(req.params.id);
+    const jclubes = await Clube.find({});
+
+    res.render(caminhoBase + 'edt', {
+        Jogador: resultado,
+        Clubes: jclubes
+    });
+}
 
 
         this.edt = async(req, res)=>{
+            var jclube = null;
+            if(req.body.clube!=null)
+            {
+            jclube = await Clube.findById(req.body.clube)
+            }
+            await Jogador.findByIdAndUpdate(req.params.id, {
+            nome:req.body.nome,
+            camisa:req.body.camisa,
+            localNascimento:req.body.localNascimento,
+            clube:jclube,
+            posicao:req.body.posicao
+       
+    })
+
                     if(req.file){
                         req.body.foto = req.file.buffer
                         }

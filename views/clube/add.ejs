@@ -9,8 +9,17 @@
             <input type="text" name="nome"><br>
             <label>Ano de fundação:</label>
             <input type="text" name="anoFundacao"><br>
-            <label>Campeonatos:</label>
-            <input type="text" name="campeonatos"><br>
+            <div class="mb-3">
+                <label for="campeonato" class="form-label">Campeonatos</label>
+                <select name="campeonato" id="campeonato" class="form-control">
+                <option value="">selecione</option>
+                <%Campeonatos.forEach(function(campeonato){%>
+                <option value='<%=campeonato.id%>'>
+                <%=campeonato.nome%>
+                </option>
+                <%})%>
+                </select>
+            </div>
             <label>Número de títulos:</label>
             <input type="number" name="nroTitulos"><br>
             <label>Escudo:</label>

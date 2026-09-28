@@ -15,10 +15,21 @@
         <input type="text" name="localNascimento"
         value="<%=Tecnico.localNascimento%>"
         ><br>
-        <label>Clube:</label>
-        <input type="text" name="clube"
-        value="<%=Tecnico.clube%>"
-        ><br>
+        <div class="mb-3">
+            <label for="clube" class="form-label">Clube</label>
+                <select name="clube" id="clube" class="form-control">
+                    <option value="">selecione</option>
+                    <% Clubes.forEach(function(clube){ %>
+                        <option value="<%=clube.id%>"
+                            <%= (Tecnico.clube && clube.id.toString() === Tecnico.clube.toString())
+                                ? 'selected'
+                                : '' %>
+                    >
+                        <%=clube.nome%>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
         <label>Foto:</label>
         <input type="file" name="foto"
         value="<%=Tecnico.foto%>"

@@ -25,7 +25,7 @@
             <td><%=nome%></td>
             <td><%=camisa%></td>
             <td><%=localNascimento%></td>
-            <td><%=clube%></td>
+            <td><%=clube != null ? clube.nome : ""%></td>
             <td><%=posicao%></td>
             <td><img src="<%=foto%>" width="150" height="150"></td>
             <td><a href="/jogador/edt/<%=id%>">Editar</a>

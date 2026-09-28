@@ -1,5 +1,6 @@
 //importar o Model
 import Tecnico from '../models/tecnico.js'
+import Clube from '../models/clube.js'
 
 export default class TecnicoController{
 
@@ -7,15 +8,22 @@ export default class TecnicoController{
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
-            res.render(caminhoBase + "add")
+            const resultado = await Clube.find({});
+            res.render(caminhoBase + "add", {
+                Clubes: resultado})
         }
         this.add = async(req, res)=>{
             //cria o Aluno
 
+             let tclube = null;
+                if(req.body.clube != null) {
+                tclube = await Clube.findById(req.body.clube)
+            }
+
             await Tecnico.create({
                 nome: req.body.nome,
                 localNascimento:req.body.localNascimento,
-                clube:req.body.clube,
+                clube:tclube,
                 foto:req.file.buffer
             });
             
@@ -23,7 +31,7 @@ export default class TecnicoController{
 
         }
         this.list = async(req, res)=>{
-            const resultado = await Tecnico.find({})
+            const resultado = await Tecnico.find({}) .populate('clube');
             res.render(caminhoBase + 'lst', {Tecnicos:resultado})
         }
         this.find = async(req, res)=>{
@@ -37,21 +45,33 @@ export default class TecnicoController{
      
 
          this.openEdt = async(req, res)=>{
-            //passar quem eu quero editar
-            const id = req.params.id
-            console.log(id)
-            const tecnico = await Tecnico.findById(id) 
-            console.log(Tecnico)
-            res.render(caminhoBase + "edt", 
-                {Tecnico:tecnico})
-        }
+    const resultado = await Tecnico.findById(req.params.id);
+    const tclubes = await Clube.find({});
+
+    res.render(caminhoBase + 'edt', {
+        Tecnico: resultado,
+        Clubes: tclubes
+    });
+}
 
 
         this.edt = async(req, res)=>{
+            var tclube = null;
+            if(req.body.clube!=null)
+            {
+            tclube = await Clube.findById(req.body.clube)
+            }
+            await Tecnico.findByIdAndUpdate(req.params.id, {
+            nome: req.body.nome,
+            localNascimento:req.body.localNascimento,
+            clube:tclube
+       
+    })
+
                     if(req.file){
                         req.body.foto = req.file.buffer
                         }
-                
+        
                 await Tecnico.findByIdAndUpdate(req.params.id, req.body)
                     res.redirect('/'+caminhoBase + 'lst');
                     }

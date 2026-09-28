@@ -22,7 +22,7 @@
         <tr>
             <td><%=nome%></td>
             <td><%=localNascimento%></td>
-            <td><%=clube%></td>
+            <td><%=clube != null ? clube.nome : ""%></td>
             <td><img src="<%=foto%>" width="150" height="150"></td>
             <td><a href="/tecnico/edt/<%=id%>">Editar</a>
             <a href="/tecnico/del/<%=id%>">Excluir</a></td>

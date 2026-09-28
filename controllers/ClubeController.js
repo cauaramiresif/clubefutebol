@@ -1,5 +1,6 @@
 //importar o Model
 import Clube from '../models/clube.js'
+import Campeonato from '../models/campeonato.js'
 
 export default class ClubeController{
 
@@ -7,15 +8,22 @@ export default class ClubeController{
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
-            res.render(caminhoBase + "add")
+            const resultado = await Campeonato.find({});
+            res.render(caminhoBase + "add", {
+                Campeonatos: resultado})
         }
         this.add = async(req, res)=>{
             //cria o Aluno
 
+             let ccampeonato = null;
+                if(req.body.clube != null) {
+                ccampeonato = await Campeonato.findById(req.body.campeonato)
+            }            
+
             await Clube.create({
                 nome: req.body.nome,
                 anoFundacao:req.body.anoFundacao,
-                campeonatos:req.body.campeonatos,
+                campeonatos:ccampeonato,
                 nroTitulos:req.body.nroTitulos,
                 escudo:req.file.buffer
             });
@@ -23,7 +31,7 @@ export default class ClubeController{
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Clube.find({})
+            const resultado = await Clube.find({}) .populate('campeonatos');
             res.render(caminhoBase + 'lst', {Clubes:resultado})
         }
         this.find = async(req, res)=>{
@@ -37,24 +45,37 @@ export default class ClubeController{
      
 
          this.openEdt = async(req, res)=>{
-            //passar quem eu quero editar
-            const id = req.params.id
-            console.log(id)
-            const clube = await Clube.findById(id) 
-            console.log(Clube)
-            res.render(caminhoBase + "edt", 
-                {Clube:clube})
-        }
+    const resultado = await Clube.findById(req.params.id);
+    const ccampeonato = await Campeonato.find({});
+
+    res.render(caminhoBase + 'edt', {
+        Clube: resultado,
+        Campeonatos: ccampeonato
+    });
+}
 
 
         this.edt = async(req, res)=>{
-            if(req.file){
-                req.body.escudo = req.file.buffer
-                }
-
-        await Clube.findByIdAndUpdate(req.params.id, req.body)
-            res.redirect('/'+caminhoBase + 'lst');
+            var ccampeonato = null;
+            if(req.body.campeonato!=null)
+            {
+            ccampeonato = await Campeonato.findById(req.body.campeonato)
             }
+            await Clube.findByIdAndUpdate(req.params.id, {
+            nome: req.body.nome,
+            anoFundacao:req.body.anoFundacao,
+            campeonatos:ccampeonato,
+            nroTitulos:req.body.nroTitulos
+       
+    })
+
+                    if(req.file){
+                        req.body.foto = req.file.buffer
+                        }
+        
+                await Clube.findByIdAndUpdate(req.params.id, req.body)
+                    res.redirect('/'+caminhoBase + 'lst');
+                    }
 
         this.del = async(req, res)=>{
         await Clube.findByIdAndDelete(req.params.id)
