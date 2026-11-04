@@ -1,0 +1,22 @@
+<%
+  // Cartão de técnico - usado na home e na listagem.
+  var clubeNome = tecnico.clube && tecnico.clube.nome ? tecnico.clube.nome : 'Sem clube vinculado';
+  var acoes = (typeof mostrarAcoes === 'undefined') || mostrarAcoes;
+%>
+<article class="card">
+  <div class="card__midia card__midia--retrato">
+    <% if (tecnico.foto) { %>
+      <img src="<%= tecnico.foto %>" width="112" height="112"
+           alt="Foto do técnico <%= tecnico.nome %>">
+    <% } else { %>
+      <span class="card__inicial" role="img" aria-label="Sem foto cadastrada para <%= tecnico.nome %>">&#128104;&zwnj;&#8205;&#127893;</span>
+    <% } %>
+  </div>
+  <div class="card__corpo">
+    <h3 class="card__titulo"><%= tecnico.nome %></h3>
+    <ul class="card__lista">
+      <li><strong>Clube:</strong> <%= clubeNome %></li>
+      <li><strong>Nascimento:</strong> <%= tecnico.localNascimento %></li>
+    </ul>
+  </div>
+</article>

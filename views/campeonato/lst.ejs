@@ -1,0 +1,25 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Campeonatos</h1>
+  <p class="subtitulo-pagina">Competições cadastradas, com o país de origem de cada uma.</p>
+
+  <form class="barra-ferramentas" action="/campeonato/lst" method="post">
+    <div class="campo-busca">
+      <label for="filtro">Pesquisar campeonato pelo nome</label>
+      <input type="search" id="filtro" name="filtro" placeholder="Digite o nome do campeonato">
+    </div>
+    <button type="submit" class="btn btn--acento">Pesquisar</button>
+  </form>
+
+  <% if (!Campeonatos || Campeonatos.length === 0) { %>
+    <p class="aviso-vazio">Nenhum campeonato encontrado no banco de dados.</p>
+  <% } else { %>
+    <p class="sr-only" role="status">Exibindo <%= Campeonatos.length %> campeonato(s).</p>
+    <div class="grade-cards">
+      <% for (const campeonato of Campeonatos) { %>
+        <%- include('../parciais/card_campeonato', { campeonato: campeonato }) %>
+      <% } %>
+    </div>
+  <% } %>
+
+ <%-include('../rodape.ejs')%>

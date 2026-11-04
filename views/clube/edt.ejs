@@ -1,0 +1,64 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Editar clube</h1>
+  <p class="subtitulo-pagina">Altere os dados de <strong><%= Clube.nome %></strong> e salve para atualizar o banco de dados.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/clube/lst">Voltar para a lista de clubes</a>
+  </p>
+
+  <form class="formulario" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<%= Clube.id %>">
+
+    <fieldset>
+      <legend>Dados do clube</legend>
+
+      <div class="campo">
+        <label for="nome">Nome do clube</label>
+        <input type="text" id="nome" name="nome" value="<%= Clube.nome %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="anoFundacao">Ano de fundação</label>
+        <input type="text" id="anoFundacao" name="anoFundacao" value="<%= Clube.anoFundacao %>" required inputmode="numeric" pattern="[0-9]{4}">
+      </div>
+
+      <div class="campo">
+        <label for="campeonato">Campeonato disputado</label>
+        <select id="campeonato" name="campeonato">
+          <option value="">Selecione (opcional)</option>
+          <% Campeonatos.forEach(function (campeonato) { %>
+            <option value="<%= campeonato.id %>"
+              <%= (Clube.campeonatos && campeonato.id.toString() === Clube.campeonatos.toString()) ? 'selected' : '' %>>
+              <%= campeonato.nome %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="nroTitulos">Número de títulos</label>
+        <input type="number" id="nroTitulos" name="nroTitulos" value="<%= Clube.nroTitulos %>" min="0" step="1" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imagem do escudo</legend>
+      <% if (Clube.escudo) { %>
+        <p><img class="previa-imagem" src="<%= Clube.escudo %>"
+                width="112" height="112" alt="Escudo atual do clube <%= Clube.nome %>"></p>
+      <% } %>
+      <div class="campo">
+        <label for="escudo">Substituir o escudo (opcional)</label>
+        <input type="file" id="escudo" name="escudo" accept="image/*">
+        <span class="dica-campo">Deixe vazio para manter o escudo atual.</span>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Salvar alterações</button>
+      <a class="btn btn--voltar" href="/clube/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

@@ -1,0 +1,80 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Editar jogador</h1>
+  <p class="subtitulo-pagina">Altere os dados de <strong><%= Jogador.nome %></strong> e salve para atualizar o banco de dados.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/jogador/lst">Voltar para a lista de jogadores</a>
+  </p>
+
+  <form class="formulario" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<%= Jogador.id %>">
+
+    <fieldset>
+      <legend>Dados do jogador</legend>
+
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" value="<%= Jogador.nome %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="camisa">Número da camisa</label>
+        <input type="number" id="camisa" name="camisa" value="<%= Jogador.camisa %>" min="1" max="99" required>
+      </div>
+
+      <div class="campo">
+        <label for="posicao">Posição preferida</label>
+        <input type="text" id="posicao" name="posicao" value="<%= Jogador.posicao %>" required list="posicoes">
+        <datalist id="posicoes">
+          <option value="Goleiro"></option>
+          <option value="Zagueiro"></option>
+          <option value="Lateral-direito"></option>
+          <option value="Lateral-esquerdo"></option>
+          <option value="Volante"></option>
+          <option value="Meia-armador"></option>
+          <option value="Ponta-direita"></option>
+          <option value="Ponta-esquerda"></option>
+          <option value="Centroavante"></option>
+        </datalist>
+      </div>
+
+      <div class="campo">
+        <label for="localNascimento">Local de nascimento</label>
+        <input type="text" id="localNascimento" name="localNascimento" value="<%= Jogador.localNascimento %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="clube">Clube atual</label>
+        <select id="clube" name="clube">
+          <option value="">Selecione (opcional)</option>
+          <% Clubes.forEach(function (clube) { %>
+            <option value="<%= clube.id %>"
+              <%= (Jogador.clube && clube.id.toString() === Jogador.clube.toString()) ? 'selected' : '' %>>
+              <%= clube.nome %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imagem do jogador</legend>
+      <% if (Jogador.foto) { %>
+        <p><img class="previa-imagem" src="<%= Jogador.foto %>" width="112" height="112"
+                alt="Foto atual do jogador <%= Jogador.nome %>"></p>
+      <% } %>
+      <div class="campo">
+        <label for="foto">Substituir a foto (opcional)</label>
+        <input type="file" id="foto" name="foto" accept="image/*">
+        <span class="dica-campo">Deixe vazio para manter a foto atual.</span>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Salvar alterações</button>
+      <a class="btn btn--voltar" href="/jogador/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

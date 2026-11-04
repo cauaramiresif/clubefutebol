@@ -1,0 +1,56 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Cadastrar clube</h1>
+  <p class="subtitulo-pagina">Informe os dados do clube e envie a imagem do escudo.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/clube/lst">Voltar para a lista de clubes</a>
+  </p>
+
+  <form class="formulario" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Dados do clube</legend>
+
+      <div class="campo">
+        <label for="nome">Nome do clube</label>
+        <input type="text" id="nome" name="nome" required autocomplete="off">
+      </div>
+
+      <div class="campo">
+        <label for="anoFundacao">Ano de fundação</label>
+        <input type="text" id="anoFundacao" name="anoFundacao" required inputmode="numeric" pattern="[0-9]{4}">
+        <span class="dica-campo">Use quatro dígitos, por exemplo 1902.</span>
+      </div>
+
+      <div class="campo">
+        <label for="campeonato">Campeonato disputado</label>
+        <select id="campeonato" name="campeonato">
+          <option value="">Selecione (opcional)</option>
+          <% Campeonatos.forEach(function (campeonato) { %>
+            <option value="<%= campeonato.id %>"><%= campeonato.nome %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="nroTitulos">Número de títulos</label>
+        <input type="number" id="nroTitulos" name="nroTitulos" min="0" step="1" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imagem do escudo</legend>
+      <div class="campo">
+        <label for="escudo">Arquivo do escudo</label>
+        <input type="file" id="escudo" name="escudo" accept="image/*" required>
+        <span class="dica-campo">Envie uma imagem PNG, JPG ou WebP. O texto alternativo na tela será gerado com o nome do clube.</span>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Cadastrar</button>
+      <a class="btn btn--voltar" href="/clube/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

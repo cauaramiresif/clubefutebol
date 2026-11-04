@@ -1,0 +1,113 @@
+<%-include('cabecalho.ejs')%>
+
+  <section class="painel-destaque" aria-labelledby="destaque-titulo">
+    <div class="painel-destaque__grade">
+      <div>
+        <span class="olho">Portal do futebol</span>
+        <h1 id="destaque-titulo">Clubes, campeonatos, jogadores e técnicos em um só lugar</h1>
+        <p>Consulte e pesquise o conteúdo já cadastrado no banco de dados: escudos, anos de fundação, números de títulos, campeonatos disputados, posições, camisas e comissões técnicas.</p>
+        <p>
+          <a class="btn btn--acento" href="/clube/lst">Ver clubes cadastrados</a>
+          &nbsp;
+          <a class="btn btn--voltar" href="/campeonato/lst">Ver campeonatos</a>
+        </p>
+      </div>
+      <aside class="campo-boas-vindas" aria-labelledby="como-usar-titulo">
+        <h3 id="como-usar-titulo">Como usar o site</h3>
+        <ul>
+          <li>Escolha uma seção no menu superior.</li>
+          <li>Digite um nome no campo de pesquisa e acione <strong>Pesquisar</strong>.</li>
+          <li>Use <strong>A&minus;</strong> / <strong>A+</strong> no topo para ajustar a fonte.</li>
+          <li>O site funciona no celular, no tablet e no computador.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <h2 class="titulo-pagina" id="secoes-titulo">Seções do sistema</h2>
+  <p class="subtitulo-pagina">Quatro entidades cadastradas, cada uma com sua própria página de consulta.</p>
+
+  <div class="grade-atalhos" aria-labelledby="secoes-titulo">
+    <a class="atalho" href="/campeonato/lst">
+      <span class="atalho__titulo">Campeonatos</span>
+      <span class="atalho__descricao">Competições e seus países de origem.</span>
+      <span class="atalho__acao">Consultar campeonatos &rarr;</span>
+    </a>
+    <a class="atalho" href="/clube/lst">
+      <span class="atalho__titulo">Clubes</span>
+      <span class="atalho__descricao">Fundação, escudo, títulos e campeonato.</span>
+      <span class="atalho__acao">Consultar clubes &rarr;</span>
+    </a>
+    <a class="atalho" href="/jogador/lst">
+      <span class="atalho__titulo">Jogadores</span>
+      <span class="atalho__descricao">Posição, camisa, clube e nascimento.</span>
+      <span class="atalho__acao">Consultar jogadores &rarr;</span>
+    </a>
+    <a class="atalho" href="/tecnico/lst">
+      <span class="atalho__titulo">Técnicos</span>
+      <span class="atalho__descricao">Comissão técnica e clube atual.</span>
+      <span class="atalho__acao">Consultar técnicos &rarr;</span>
+    </a>
+  </div>
+
+  <section aria-labelledby="ultimos-clubes">
+    <h2 class="titulo-pagina" id="ultimos-clubes">Últimos clubes cadastrados</h2>
+    <p class="subtitulo-pagina">Os clubes mais recentes registrados no banco de dados.</p>
+    <% if (!Clubes || Clubes.length === 0) { %>
+      <p class="aviso-vazio">Ainda não existe clube cadastrado. <a href="/clube/add">Cadastrar o primeiro clube</a>.</p>
+    <% } else { %>
+      <div class="grade-cards">
+        <% for (const clube of Clubes) { %>
+          <%- include('parciais/card_clube', { clube: clube, mostrarAcoes: false }) %>
+        <% } %>
+      </div>
+      <p><a class="btn btn--primario" href="/clube/lst">Ver todos os clubes</a></p>
+    <% } %>
+  </section>
+
+  <section aria-labelledby="ultimos-jogadores">
+    <h2 class="titulo-pagina" id="ultimos-jogadores">Últimos jogadores cadastrados</h2>
+    <p class="subtitulo-pagina">Jogadores mais recentes, com clube e posição.</p>
+    <% if (!Jogadores || Jogadores.length === 0) { %>
+      <p class="aviso-vazio">Ainda não existe jogador cadastrado. <a href="/jogador/add">Cadastrar o primeiro jogador</a>.</p>
+    <% } else { %>
+      <div class="grade-cards">
+        <% for (const jogador of Jogadores) { %>
+          <%- include('parciais/card_jogador', { jogador: jogador, mostrarAcoes: false }) %>
+        <% } %>
+      </div>
+      <p><a class="btn btn--primario" href="/jogador/lst">Ver todos os jogadores</a></p>
+    <% } %>
+  </section>
+
+  <section aria-labelledby="ultimos-tecnicos">
+    <h2 class="titulo-pagina" id="ultimos-tecnicos">Últimos técnicos cadastrados</h2>
+    <p class="subtitulo-pagina">Comissões técnicas mais recentes registradas.</p>
+    <% if (!Tecnicos || Tecnicos.length === 0) { %>
+      <p class="aviso-vazio">Ainda não existe técnico cadastrado. <a href="/tecnico/add">Cadastrar o primeiro técnico</a>.</p>
+    <% } else { %>
+      <div class="grade-cards">
+        <% for (const tecnico of Tecnicos) { %>
+          <%- include('parciais/card_tecnico', { tecnico: tecnico, mostrarAcoes: false }) %>
+        <% } %>
+      </div>
+      <p><a class="btn btn--primario" href="/tecnico/lst">Ver todos os técnicos</a></p>
+    <% } %>
+  </section>
+
+  <section aria-labelledby="ultimos-campeonatos">
+    <h2 class="titulo-pagina" id="ultimos-campeonatos">Campeonatos</h2>
+    <p class="subtitulo-pagina">Competições disponíveis para vínculo com os clubes.</p>
+    <% if (!Campeonatos || Campeonatos.length === 0) { %>
+      <p class="aviso-vazio">Ainda não existe campeonato cadastrado. <a href="/campeonato/add">Cadastrar o primeiro campeonato</a>.</p>
+    <% } else { %>
+      <div class="grade-cards">
+        <% for (const campeonato of Campeonatos) { %>
+          <%- include('parciais/card_campeonato', { campeonato: campeonato, mostrarAcoes: false }) %>
+        <% } %>
+      </div>
+      <p><a class="btn btn--primario" href="/campeonato/lst">Ver todos os campeonatos</a></p>
+    <% } %>
+  </section>
+
+ <%-include('rodape.ejs')%>

@@ -1,0 +1,33 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Editar campeonato</h1>
+  <p class="subtitulo-pagina">Altere os dados de <strong><%= Campeonato.nome %></strong> e salve para atualizar o banco de dados.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/campeonato/lst">Voltar para a lista de campeonatos</a>
+  </p>
+
+  <form class="formulario" method="post">
+    <input type="hidden" name="id" value="<%= Campeonato.id %>">
+
+    <fieldset>
+      <legend>Dados do campeonato</legend>
+
+      <div class="campo">
+        <label for="nome">Nome do campeonato</label>
+        <input type="text" id="nome" name="nome" value="<%= Campeonato.nome %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="pais">País</label>
+        <input type="text" id="pais" name="pais" value="<%= Campeonato.pais %>" required>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Salvar alterações</button>
+      <a class="btn btn--voltar" href="/campeonato/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

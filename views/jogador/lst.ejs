@@ -1,0 +1,25 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Jogadores</h1>
+  <p class="subtitulo-pagina">Jogadores cadastrados com posição, número de camisa, clube e local de nascimento.</p>
+
+  <form class="barra-ferramentas" action="/jogador/lst" method="post">
+    <div class="campo-busca">
+      <label for="filtro">Pesquisar jogador pelo nome</label>
+      <input type="search" id="filtro" name="filtro" placeholder="Digite o nome do jogador">
+    </div>
+    <button type="submit" class="btn btn--acento">Pesquisar</button>
+  </form>
+
+  <% if (!Jogadores || Jogadores.length === 0) { %>
+    <p class="aviso-vazio">Nenhum jogador encontrado no banco de dados.</p>
+  <% } else { %>
+    <p class="sr-only" role="status">Exibindo <%= Jogadores.length %> jogador(es).</p>
+    <div class="grade-cards">
+      <% for (const jogador of Jogadores) { %>
+        <%- include('../parciais/card_jogador', { jogador: jogador }) %>
+      <% } %>
+    </div>
+  <% } %>
+
+ <%-include('../rodape.ejs')%>

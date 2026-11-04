@@ -1,0 +1,92 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Criar conta de torcedor</h1>
+  <p class="subtitulo-pagina">Formulário de cadastro com os campos previstos no layout do site.</p>
+
+  <p class="aviso-ilustrativo">
+    <strong>Tela meramente ilustrativa.</strong> O cadastro não grava nada no banco de dados e não cria nenhuma conta
+    de usuário; serve apenas para apresentar o layout.
+  </p>
+
+  <div class="painel-acesso">
+    <div class="painel-acesso__forma">
+      <form class="formulario" method="post" data-form-ilustrativo novalidate>
+        <fieldset>
+          <legend>Dados pessoais</legend>
+
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="torcedor@exemplo.com" required>
+          </div>
+
+          <div class="campo">
+            <label for="nascimento">Data de nascimento</label>
+            <input type="date" id="nascimento" name="nascimento" autocomplete="bday" required>
+          </div>
+
+          <div class="campo">
+            <label for="clubeFavorito">Clube do coração</label>
+            <select id="clubeFavorito" name="clubeFavorito">
+              <option value="">Selecione (opcional)</option>
+              <% Clubes.forEach(function (clube) { %>
+                <option value="<%= clube.id %>"><%= clube.nome %></option>
+              <% }) %>
+            </select>
+            <span class="dica-campo">A lista vem dos clubes já cadastrados no sistema.</span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Segurança</legend>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" autocomplete="new-password" required>
+            <span class="dica-campo">Use ao menos oito caracteres.</span>
+          </div>
+
+          <div class="campo">
+            <label for="confirmaSenha">Confirmar senha</label>
+            <input type="password" id="confirmaSenha" name="confirmaSenha" autocomplete="new-password" required>
+          </div>
+
+          <div class="campo campo--checkbox">
+            <input type="checkbox" id="termos" name="termos" required>
+            <label for="termos">Li e aceito os termos de uso do portal</label>
+          </div>
+        </fieldset>
+
+        <div class="formulario-acoes">
+          <button type="submit" class="btn btn--acento">Criar conta</button>
+          <a class="btn btn--voltar" href="/">Voltar ao início</a>
+        </div>
+
+        <p class="aviso-vazio" data-aviso-envio hidden>
+          Esta é uma tela ilustrativa: nenhum dado de cadastro foi enviado ou armazenado.
+        </p>
+
+        <p class="enlace-troca">
+          Já tem conta? <a href="/login">Entrar no Clube Futebol</a>
+        </p>
+      </form>
+    </div>
+
+    <aside class="painel-acesso__lateral" aria-labelledby="cadastro-info">
+      <h2 id="cadastro-info">Campos previstos no layout</h2>
+      <ol>
+        <li><strong>Dados pessoais</strong> para identificar o torcedor no portal.</li>
+        <li><strong>Clube do coração</strong> escolhido entre os clubes já cadastrados.</li>
+        <li><strong>Segurança</strong> com senha, confirmação e aceite dos termos de uso.</li>
+      </ol>
+      <p class="aviso-ilustrativo aviso-ilustrativo--painel">
+        Para marcar favoritos agora, use o coração nos cartões da página de <a href="/clube/lst">clubes</a>.
+      </p>
+    </aside>
+  </div>
+
+<%-include('../rodape.ejs')%>

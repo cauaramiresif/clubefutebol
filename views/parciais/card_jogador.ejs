@@ -1,0 +1,26 @@
+<%
+  // Cartão de jogador - usado na home e na listagem.
+  var clubeNome = jogador.clube && jogador.clube.nome ? jogador.clube.nome : 'Sem clube vinculado';
+  var acoes = (typeof mostrarAcoes === 'undefined') || mostrarAcoes;
+%>
+<article class="card">
+  <div class="card__midia card__midia--retrato">
+    <% if (jogador.foto) { %>
+      <img src="<%= jogador.foto %>" width="112" height="112"
+           alt="Foto do jogador <%= jogador.nome %>">
+    <% } else { %>
+      <span class="card__inicial" role="img" aria-label="Sem foto cadastrada para <%= jogador.nome %>">&#9917;</span>
+    <% } %>
+  </div>
+  <div class="card__corpo">
+    <h3 class="card__titulo">
+      <%= jogador.nome %>
+      <span class="etiqueta" aria-label="Número da camisa <%= jogador.camisa %>"><%= jogador.camisa %></span>
+    </h3>
+    <ul class="card__lista">
+      <li><strong>Posição:</strong> <%= jogador.posicao %></li>
+      <li><strong>Clube:</strong> <%= clubeNome %></li>
+      <li><strong>Nascimento:</strong> <%= jogador.localNascimento %></li>
+    </ul>
+  </div>
+</article>

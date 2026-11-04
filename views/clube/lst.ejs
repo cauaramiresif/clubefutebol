@@ -1,0 +1,29 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Clubes</h1>
+  <p class="subtitulo-pagina">Lista os clubes cadastrados no banco de dados com ano de fundação, campeonato, número de títulos e escudo.</p>
+
+  <form class="barra-ferramentas" action="/clube/lst" method="post">
+    <div class="campo-busca">
+      <label for="filtro">Pesquisar clube pelo nome</label>
+      <input type="search" id="filtro" name="filtro" placeholder="Digite o nome do clube">
+    </div>
+    <button type="submit" class="btn btn--acento">Pesquisar</button>
+    <button type="button" class="btn btn--favoritos" data-filtro-favoritos aria-pressed="false">
+      <span aria-hidden="true">&#9825;</span> Somente favoritos
+    </button>
+  </form>
+
+  <% if (!Clubes || Clubes.length === 0) { %>
+    <p class="aviso-vazio">Nenhum clube encontrado no banco de dados.</p>
+  <% } else { %>
+    <p class="sr-only" role="status">Exibindo <%= Clubes.length %> clube(s).</p>
+    <div class="grade-cards">
+      <% for (const clube of Clubes) { %>
+        <%- include('../parciais/card_clube', { clube: clube }) %>
+      <% } %>
+    </div>
+    <p class="aviso-vazio" data-aviso-sem-favoritos hidden>Você ainda não marcou nenhum clube com o coração.</p>
+  <% } %>
+
+ <%-include('../rodape.ejs')%>

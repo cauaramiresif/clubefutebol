@@ -1,0 +1,103 @@
+<%
+  // "paginaAtual" vem de res.locals (definido em index.js) e marca o item ativo do menu.
+  var atual = (typeof paginaAtual !== 'undefined' && paginaAtual) ? paginaAtual : '/';
+  function estaAtivo(caminho) {
+    return caminho === '/' ? atual === '/' : atual.indexOf(caminho) === 0;
+  }
+  function ariaAtual(caminho) {
+    return estaAtivo(caminho) ? ' aria-current="page"' : '';
+  }
+
+  // Título da aba do navegador, derivado da seção aberta.
+  var Titulos = {
+    '/': 'Início',
+    '/campeonato': 'Campeonatos',
+    '/clube': 'Clubes',
+    '/jogador': 'Jogadores',
+    '/tecnico': 'Técnicos',
+    '/login': 'Entrar',
+    '/cadastro': 'Criar conta'
+  };
+  var tituloSecao = Titulos['/'] ;
+  Object.keys(Titulos).forEach(function (chave) {
+    if (chave !== '/' && estaAtivo(chave)) tituloSecao = Titulos[chave];
+  });
+  var tituloAba = (typeof tituloPagina !== 'undefined' && tituloPagina) ? tituloPagina : tituloSecao;
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clube Futebol - portal de consulta sobre clubes, campeonatos, jogadores e técnicos de futebol.">
+  <title><%= tituloAba %> | Clube Futebol</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/font-scale.js"></script>
+  <script src="/js/menu.js" defer></script>
+  <script src="/js/favoritos.js" defer></script>
+  <script src="/js/acesso.js" defer></script>
+</head>
+<body>
+  <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+  <div class="topo-preludio">
+    <div class="container">
+      <p>Portal de notícias e consulta do futebol &middot; dados atualizados no banco do sistema</p>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="container">
+      <a class="marca" href="/" aria-label="Clube Futebol - página inicial">
+        <span class="marca__simbolo" aria-hidden="true">CF</span>
+        <span>
+          <span class="marca__nome">Clube Futebol</span>
+          <span class="marca__slogan">Clubes &amp; Campeonatos</span>
+        </span>
+      </a>
+
+      <div class="masthead__acoes">
+        <a class="chip-favoritos" href="/clube/lst"
+           aria-label="Clubes favoritos: use o botão de coração nos cartões para marcar">
+          <span aria-hidden="true">&#9825;</span>
+          <span>Favoritos</span>
+          <span class="chip-favoritos__total" data-contador-favoritos>0</span>
+        </a>
+
+        <p class="area-usuario">
+          <a class="btn btn--entrar" href="/login"<%- ariaAtual('/login') %>>Entrar</a>
+          <a class="btn btn--criar" href="/cadastro"<%- ariaAtual('/cadastro') %>>Criar conta</a>
+        </p>
+      </div>
+      <p id="favoritos-aviso" class="sr-only" role="status" aria-live="polite"></p>
+
+      <div class="controle-fonte" role="group" aria-label="Controle do tamanho da fonte">
+        <span class="controle-fonte__rotulo" id="rotulo-fonte">Fonte</span>
+        <button type="button" class="controle-fonte__botao" data-fonte="diminuir"
+                aria-describedby="rotulo-fonte" title="Diminuir tamanho da fonte">A&minus;</button>
+        <span class="controle-fonte__valor" id="fonte-valor" aria-live="off">100%</span>
+        <button type="button" class="controle-fonte__botao" data-fonte="aumentar"
+                aria-describedby="rotulo-fonte" title="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <p id="fonte-aviso" class="sr-only" role="status" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <nav class="menu-principal" aria-label="Menu principal do site">
+    <div class="container">
+      <button type="button" class="menu-trigger" id="menu-trigger"
+              aria-expanded="false" aria-controls="menu-lista">
+        <span aria-hidden="true">&#9776;</span> Menu
+      </button>
+
+      <ul class="menu__lista" id="menu-lista" data-aberto="false">
+        <li><a href="/"<%- ariaAtual('/') %>>Início</a></li>
+        <li><a href="/campeonato/lst"<%- ariaAtual('/campeonato') %>>Campeonatos</a></li>
+        <li><a href="/clube/lst"<%- ariaAtual('/clube') %>>Clubes</a></li>
+        <li><a href="/jogador/lst"<%- ariaAtual('/jogador') %>>Jogadores</a></li>
+        <li><a href="/tecnico/lst"<%- ariaAtual('/tecnico') %>>Técnicos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="conteudo" id="conteudo-principal" tabindex="-1">

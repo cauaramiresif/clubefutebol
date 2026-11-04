@@ -1,0 +1,59 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Editar técnico</h1>
+  <p class="subtitulo-pagina">Altere os dados de <strong><%= Tecnico.nome %></strong> e salve para atualizar o banco de dados.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/tecnico/lst">Voltar para a lista de técnicos</a>
+  </p>
+
+  <form class="formulario" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<%= Tecnico.id %>">
+
+    <fieldset>
+      <legend>Dados do técnico</legend>
+
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" value="<%= Tecnico.nome %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="localNascimento">Local de nascimento</label>
+        <input type="text" id="localNascimento" name="localNascimento" value="<%= Tecnico.localNascimento %>" required>
+      </div>
+
+      <div class="campo">
+        <label for="clube">Clube atual</label>
+        <select id="clube" name="clube">
+          <option value="">Selecione (opcional)</option>
+          <% Clubes.forEach(function (clube) { %>
+            <option value="<%= clube.id %>"
+              <%= (Tecnico.clube && clube.id.toString() === Tecnico.clube.toString()) ? 'selected' : '' %>>
+              <%= clube.nome %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imagem do técnico</legend>
+      <% if (Tecnico.foto) { %>
+        <p><img class="previa-imagem" src="<%= Tecnico.foto %>" width="112" height="112"
+                alt="Foto atual do técnico <%= Tecnico.nome %>"></p>
+      <% } %>
+      <div class="campo">
+        <label for="foto">Substituir a foto (opcional)</label>
+        <input type="file" id="foto" name="foto" accept="image/*">
+        <span class="dica-campo">Deixe vazio para manter a foto atual.</span>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Salvar alterações</button>
+      <a class="btn btn--voltar" href="/tecnico/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

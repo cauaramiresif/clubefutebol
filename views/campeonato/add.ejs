@@ -1,0 +1,31 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Cadastrar campeonato</h1>
+  <p class="subtitulo-pagina">Preencha os dados da competição. Todos os campos são obrigatórios.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/campeonato/lst">Voltar para a lista de campeonatos</a>
+  </p>
+
+  <form class="formulario" method="post">
+    <fieldset>
+      <legend>Dados do campeonato</legend>
+
+      <div class="campo">
+        <label for="nome">Nome do campeonato</label>
+        <input type="text" id="nome" name="nome" required autocomplete="off">
+      </div>
+
+      <div class="campo">
+        <label for="pais">País</label>
+        <input type="text" id="pais" name="pais" required autocomplete="off">
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Cadastrar</button>
+      <a class="btn btn--voltar" href="/campeonato/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

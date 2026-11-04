@@ -1,0 +1,62 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Entrar no Clube Futebol</h1>
+  <p class="subtitulo-pagina">Área do torcedor para consultar e favoritar os clubes do coração.</p>
+
+  <p class="aviso-ilustrativo">
+    <strong>Tela meramente ilustrativa.</strong> Nenhum cadastro, login ou senha é processado pelo sistema:
+    os campos existem para mostrar o layout proposto e nada é enviado ao servidor.
+  </p>
+
+  <div class="painel-acesso">
+    <div class="painel-acesso__forma">
+      <form class="formulario" method="post" data-form-ilustrativo novalidate>
+        <fieldset>
+          <legend>Identificação</legend>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="torcedor@exemplo.com" required>
+          </div>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+            <span class="dica-campo">A senha não é armazenada em lugar nenhum.</span>
+          </div>
+
+          <div class="campo campo--checkbox">
+            <input type="checkbox" id="lembrar" name="lembrar">
+            <label for="lembrar">Manter conectado neste dispositivo</label>
+          </div>
+        </fieldset>
+
+        <div class="formulario-acoes">
+          <button type="submit" class="btn btn--acento">Entrar</button>
+          <a class="btn btn--voltar" href="/">Voltar ao início</a>
+        </div>
+
+        <p class="aviso-vazio" data-aviso-envio hidden>
+          Esta é uma tela ilustrativa: não existe verificação de usuário e senha no sistema.
+        </p>
+
+        <p class="enlace-troca">
+          Ainda não tem conta? <a href="/cadastro">Criar cadastro de torcedor</a>
+        </p>
+      </form>
+    </div>
+
+    <aside class="painel-acesso__lateral" aria-labelledby="vantagens-login">
+      <h2 id="vantagens-login">O que a área do torcedor já mostra</h2>
+      <ol>
+        <li>O coração nos cartões de clube marca e desmarca o time do coração na hora.</li>
+        <li>O botão <strong>Somente favoritos</strong>, na lista de clubes, esconde os demais.</li>
+        <li>O contador ao lado de <strong>Favoritos</strong>, no topo, acompanha a marcação.</li>
+      </ol>
+      <p class="aviso-ilustrativo aviso-ilustrativo--painel">
+        A marcação fica apenas no navegador. Ela não pertence a nenhuma conta, porque o login ainda não existe no sistema.
+      </p>
+    </aside>
+  </div>
+
+<%-include('../rodape.ejs')%>

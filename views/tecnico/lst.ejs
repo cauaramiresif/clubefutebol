@@ -1,0 +1,25 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Técnicos</h1>
+  <p class="subtitulo-pagina">Comissão técnica cadastrada, com clube atual e local de nascimento.</p>
+
+  <form class="barra-ferramentas" action="/tecnico/lst" method="post">
+    <div class="campo-busca">
+      <label for="filtro">Pesquisar técnico pelo nome</label>
+      <input type="search" id="filtro" name="filtro" placeholder="Digite o nome do técnico">
+    </div>
+    <button type="submit" class="btn btn--acento">Pesquisar</button>
+  </form>
+
+  <% if (!Tecnicos || Tecnicos.length === 0) { %>
+    <p class="aviso-vazio">Nenhum técnico encontrado no banco de dados.</p>
+  <% } else { %>
+    <p class="sr-only" role="status">Exibindo <%= Tecnicos.length %> técnico(s).</p>
+    <div class="grade-cards">
+      <% for (const tecnico of Tecnicos) { %>
+        <%- include('../parciais/card_tecnico', { tecnico: tecnico }) %>
+      <% } %>
+    </div>
+  <% } %>
+
+ <%-include('../rodape.ejs')%>

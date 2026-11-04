@@ -1,0 +1,50 @@
+<%-include('../cabecalho.ejs')%>
+
+  <h1 class="titulo-pagina">Cadastrar técnico</h1>
+  <p class="subtitulo-pagina">Informe os dados do treinador e envie a foto de identificação.</p>
+
+  <p class="bloco-acoes">
+    <a class="btn btn--voltar" href="/tecnico/lst">Voltar para a lista de técnicos</a>
+  </p>
+
+  <form class="formulario" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Dados do técnico</legend>
+
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" required autocomplete="off">
+      </div>
+
+      <div class="campo">
+        <label for="localNascimento">Local de nascimento</label>
+        <input type="text" id="localNascimento" name="localNascimento" required placeholder="Cidade e estado">
+      </div>
+
+      <div class="campo">
+        <label for="clube">Clube atual</label>
+        <select id="clube" name="clube">
+          <option value="">Selecione (opcional)</option>
+          <% Clubes.forEach(function (clube) { %>
+            <option value="<%= clube.id %>"><%= clube.nome %></option>
+          <% }) %>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imagem do técnico</legend>
+      <div class="campo">
+        <label for="foto">Arquivo da foto</label>
+        <input type="file" id="foto" name="foto" accept="image/*" required>
+        <span class="dica-campo">A foto recebe como descrição alternativa o nome informado acima.</span>
+      </div>
+    </fieldset>
+
+    <div class="formulario-acoes">
+      <button type="submit" class="btn btn--acento">Cadastrar</button>
+      <a class="btn btn--voltar" href="/tecnico/lst">Cancelar</a>
+    </div>
+  </form>
+
+<%-include('../rodape.ejs')%>

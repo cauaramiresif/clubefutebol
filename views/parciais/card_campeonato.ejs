@@ -1,0 +1,15 @@
+<%
+  // Cartão de campeonato - usado na home e na listagem.
+  var acoes = (typeof mostrarAcoes === 'undefined') || mostrarAcoes;
+%>
+<article class="card">
+  <div class="card__midia">
+    <span class="card__inicial" role="img" aria-label="Ícone de troféu do campeonato <%= campeonato.nome %>">&#127942;</span>
+  </div>
+  <div class="card__corpo">
+    <h3 class="card__titulo"><%= campeonato.nome %></h3>
+    <ul class="card__lista">
+      <li><strong>País:</strong> <%= campeonato.pais %></li>
+    </ul>
+  </div>
+</article>
