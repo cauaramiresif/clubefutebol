@@ -5,7 +5,8 @@
       <div>
         <span class="olho">Portal do futebol</span>
         <h1 id="destaque-titulo">Clubes, campeonatos, jogadores e técnicos em um só lugar</h1>
-        <p>Consulte e pesquise o conteúdo já cadastrado no banco de dados: escudos, anos de fundação, números de títulos, campeonatos disputados, posições, camisas e comissões técnicas.</p>
+        <p>Consulte e pesquise o conteúdo já cadastrado no banco de dados: escudos, anos de fundação, números de
+          títulos, campeonatos disputados, posições, camisas e comissões técnicas.</p>
         <p>
           <a class="btn btn--acento" href="/clube/lst">Ver clubes cadastrados</a>
           &nbsp;
@@ -52,62 +53,85 @@
 
   <section aria-labelledby="ultimos-clubes">
     <h2 class="titulo-pagina" id="ultimos-clubes">Últimos clubes cadastrados</h2>
+
     <p class="subtitulo-pagina">Os clubes mais recentes registrados no banco de dados.</p>
-    <% if (!Clubes || Clubes.length === 0) { %>
-      <p class="aviso-vazio">Ainda não existe clube cadastrado. <a href="/clube/add">Cadastrar o primeiro clube</a>.</p>
-    <% } else { %>
-      <div class="grade-cards">
-        <% for (const clube of Clubes) { %>
-          <%- include('parciais/card_clube', { clube: clube, mostrarAcoes: false }) %>
-        <% } %>
+    <!--trazer o q tem do mongo -->
+    <article class="card">
+      <button type="button" class="card__favorito" data-favorito="" data-nome="nome" aria-pressed="false"
+        aria-label="Adicionar xxxxxx aos clubes favoritos">
+        <span class="card__favorito__icone" aria-hidden="true">&#9825;</span>
+      </button>
+      <div class="card__midia">
+
+        <img src="" width="112" height="112" alt="Escudo do clube nome">
+
       </div>
-      <p><a class="btn btn--primario" href="/clube/lst">Ver todos os clubes</a></p>
-    <% } %>
+      <div class="card__corpo">
+        <h3 class="card__titulo">
+          nome clube
+        </h3>
+        <ul class="card__lista">
+          <li><strong>Fundação:</strong>
+            1999
+          </li>
+          <li><strong>Campeonato:</strong>
+            serie A
+          </li>
+          <li><strong>Títulos:</strong>
+            3
+          </li>
+        </ul>
+      </div>
+    </article>
+    <!--ate aqui-->
   </section>
 
   <section aria-labelledby="ultimos-jogadores">
     <h2 class="titulo-pagina" id="ultimos-jogadores">Últimos jogadores cadastrados</h2>
     <p class="subtitulo-pagina">Jogadores mais recentes, com clube e posição.</p>
-    <% if (!Jogadores || Jogadores.length === 0) { %>
-      <p class="aviso-vazio">Ainda não existe jogador cadastrado. <a href="/jogador/add">Cadastrar o primeiro jogador</a>.</p>
-    <% } else { %>
-      <div class="grade-cards">
-        <% for (const jogador of Jogadores) { %>
-          <%- include('parciais/card_jogador', { jogador: jogador, mostrarAcoes: false }) %>
+    <% if (!Jogadores || Jogadores.length===0) { %>
+      <p class="aviso-vazio">Ainda não existe jogador cadastrado. <a href="/jogador/add">Cadastrar o primeiro
+          jogador</a>.</p>
+      <% } else { %>
+        <div class="grade-cards">
+          <% for (const jogador of Jogadores) { %>
+            <%- include('parciais/card_jogador', { jogador: jogador, mostrarAcoes: false }) %>
+              <% } %>
+        </div>
+        <p><a class="btn btn--primario" href="/jogador/lst">Ver todos os jogadores</a></p>
         <% } %>
-      </div>
-      <p><a class="btn btn--primario" href="/jogador/lst">Ver todos os jogadores</a></p>
-    <% } %>
   </section>
 
   <section aria-labelledby="ultimos-tecnicos">
     <h2 class="titulo-pagina" id="ultimos-tecnicos">Últimos técnicos cadastrados</h2>
     <p class="subtitulo-pagina">Comissões técnicas mais recentes registradas.</p>
-    <% if (!Tecnicos || Tecnicos.length === 0) { %>
-      <p class="aviso-vazio">Ainda não existe técnico cadastrado. <a href="/tecnico/add">Cadastrar o primeiro técnico</a>.</p>
-    <% } else { %>
-      <div class="grade-cards">
-        <% for (const tecnico of Tecnicos) { %>
-          <%- include('parciais/card_tecnico', { tecnico: tecnico, mostrarAcoes: false }) %>
+    <% if (!Tecnicos || Tecnicos.length===0) { %>
+      <p class="aviso-vazio">Ainda não existe técnico cadastrado. <a href="/tecnico/add">Cadastrar o primeiro
+          técnico</a>.</p>
+      <% } else { %>
+        <div class="grade-cards">
+          <% for (const tecnico of Tecnicos) { %>
+            <%- include('parciais/card_tecnico', { tecnico: tecnico, mostrarAcoes: false }) %>
+              <% } %>
+        </div>
+        <p><a class="btn btn--primario" href="/tecnico/lst">Ver todos os técnicos</a></p>
         <% } %>
-      </div>
-      <p><a class="btn btn--primario" href="/tecnico/lst">Ver todos os técnicos</a></p>
-    <% } %>
   </section>
 
   <section aria-labelledby="ultimos-campeonatos">
     <h2 class="titulo-pagina" id="ultimos-campeonatos">Campeonatos</h2>
     <p class="subtitulo-pagina">Competições disponíveis para vínculo com os clubes.</p>
-    <% if (!Campeonatos || Campeonatos.length === 0) { %>
-      <p class="aviso-vazio">Ainda não existe campeonato cadastrado. <a href="/campeonato/add">Cadastrar o primeiro campeonato</a>.</p>
-    <% } else { %>
-      <div class="grade-cards">
-        <% for (const campeonato of Campeonatos) { %>
-          <%- include('parciais/card_campeonato', { campeonato: campeonato, mostrarAcoes: false }) %>
+    <% if (!Campeonatos || Campeonatos.length===0) { %>
+      <p class="aviso-vazio">Ainda não existe campeonato cadastrado. <a href="/campeonato/add">Cadastrar o primeiro
+          campeonato</a>.</p>
+      <% } else { %>
+        <div class="grade-cards">
+          <% for (const campeonato of Campeonatos) { %>
+            <%- include('parciais/card_campeonato', { campeonato: campeonato, mostrarAcoes: false }) %>
+              <% } %>
+        </div>
+        <p><a class="btn btn--primario" href="/campeonato/lst">Ver todos os campeonatos</a></p>
         <% } %>
-      </div>
-      <p><a class="btn btn--primario" href="/campeonato/lst">Ver todos os campeonatos</a></p>
-    <% } %>
   </section>
 
- <%-include('rodape.ejs')%>
+  <%-include('rodape.ejs')%>
