@@ -56,33 +56,35 @@
 
     <p class="subtitulo-pagina">Os clubes mais recentes registrados no banco de dados.</p>
     <!--trazer o q tem do mongo -->
+    <%for (const {id, nome, anoFundacao, campeonatos, nroTitulos, escudo} of Clubes) {%>
     <article class="card">
-      <button type="button" class="card__favorito" data-favorito="" data-nome="nome" aria-pressed="false"
-        aria-label="Adicionar xxxxxx aos clubes favoritos">
+      <button type="button" class="card__favorito" data-favorito="<%=id%>" data-nome="<%=nome%>" aria-pressed="false"
+        aria-label="Adicionar <%=nome%> aos clubes favoritos">
         <span class="card__favorito__icone" aria-hidden="true">&#9825;</span>
       </button>
       <div class="card__midia">
 
-        <img src="" width="112" height="112" alt="Escudo do clube nome">
+        <img src="<%=escudo%>" width="112" height="112" alt="Escudo do clube nome">
 
       </div>
       <div class="card__corpo">
         <h3 class="card__titulo">
-          nome clube
+          <%=nome%>
         </h3>
         <ul class="card__lista">
           <li><strong>Fundação:</strong>
-            1999
+            <%=anoFundacao%>
           </li>
           <li><strong>Campeonato:</strong>
-            serie A
+            <%=campeonatos != null ? campeonatos.nome : ""%>
           </li>
           <li><strong>Títulos:</strong>
-            3
+            <%=nroTitulos%>
           </li>
         </ul>
       </div>
     </article>
+    <%}%>
     <!--ate aqui-->
   </section>
 
